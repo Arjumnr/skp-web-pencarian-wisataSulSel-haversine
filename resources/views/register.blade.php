@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="h-100">
 
 <head>
@@ -56,4 +56,4 @@
     <!--endRemoveIf(production)-->
 </body>
 
-</html> --}}
+</html>

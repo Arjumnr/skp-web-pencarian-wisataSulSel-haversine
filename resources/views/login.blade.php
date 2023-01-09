@@ -24,22 +24,19 @@
                                     <h4 class="text-center mb-4">Login</h4>
                                     <form action="" method="POST">
                                         <div class="form-group">
-                                            <label><strong>Username</strong></label>
-                                            <input type="text" class="form-control" >
+                                            <label for="username"><strong>Username</strong></label>
+                                            <input type="text" id="username" class="form-control" autofocus>
                                         </div>
                                         <div class="form-group">
-                                            <label><strong>Password</strong></label>
-                                            <input type="password" class="form-control" >
+                                            <label for="password"><strong>Password</strong></label>
+                                            <input type="password"  id="password" class="form-control" >
                                         </div>
                                         
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block">Masuk</button>
                                         </div>
                                     </form>
-                                    <div class="new-account mt-3">
-                                        <p>Belum Punya Akun? <a class="text-primary"
-                                                href="{{ route('daftarAkun') }}">Daftar</a></p>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -49,9 +46,9 @@
         </div>
     </div>
 
-    <script src="{{ asset('templates/vendor/global/global.min.js') }}"></script>
+    {{-- <script src="{{ asset('templates/vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('templates/js/quixnav-init.js') }}"></script>
-    <script src="{{ asset('templates/js/custom.min.js') }}"></script>
+    <script src="{{ asset('templates/js/custom.min.js') }}"></script> --}}
 
 </body>
 

@@ -4,9 +4,8 @@
     </div>
 </div>
 </div>
-<!--**********************************
 
-    <!-- Required vendors -->
+   
 <script src="{{ asset('templates/vendor/global/global.min.js') }}"></script>
 <script src="{{ asset('templates/js/quixnav-init.js') }}"></script>
 <script src="{{ asset('templates/js/custom.min.js') }}"></script>
