@@ -21,6 +21,12 @@ class AkunSeeder extends Seeder
                 'password' => bcrypt('123'),
                 'role' => 1,
             ],
+
+            [
+                'username' => 'tg',
+                'password' => bcrypt('123'),
+                'role' => 2,
+            ],
         ];
 
         foreach ($user as $key => $value) {

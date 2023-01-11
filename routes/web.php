@@ -27,29 +27,39 @@ use Illuminate\Http\Request;
 
 // Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('authh', [LoginController::class, 'authenticate'])->name('loginPost');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/authh', [LoginController::class, 'authenticate'])->name('loginPost');
 
 
 // midelware 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    // dd(['auth']);
+    Route::group(['middleware' => ['cekRole:{1}']], function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-//    Route::group(['middleware' => ['cekRole'], function(){
-//     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-//    }]);
-    
+        //WISATA
+        
+    });
+
+    // Route::group(['prefix' => '/wisata'], function () {
+    //     Route::get('/', [WisataController::class, 'index'])->name('indexWisata');
+    // });
+
+
+    Route::group(['middleware' => ['cekRole:{2}']], function () {
+        Route::get('/register', [UserController::class, 'index'])->name('indexUser');
+    });
+
+
+
+    // Route::get('/user', [UserController::class, 'index'])->name('indexUser');
 });
-Route::get('/wisata', [WisataController::class, 'index'])->name('indexWisata');
-Route::get('/user', [UserController::class, 'index'])->name('indexUser');
-// Route::get('/login', [LoginController::class, 'index'])->name('login');
-// Route::post('/login', [LoginController::class, 'authenticate'])->name('loginPost');
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 
 
-Route::get('/tes', function()
-{
+Route::get('/tes', function () {
     echo '<pre>';
     // $user = User::where('person_id', '=', 1);
     // var_dump($user->toArray()); // <---- or toJson()

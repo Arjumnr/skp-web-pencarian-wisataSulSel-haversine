@@ -18,6 +18,8 @@ class LoginController extends Controller
         if ($user = Auth::user()) {
             if ($user->role == 1) {
                 return redirect()->intended('/');
+            } elseif ($user->role == 2) {
+                return redirect()->intended('/register');
             }
         }
         return view('login');
@@ -48,21 +50,24 @@ class LoginController extends Controller
 
                     $credensial = $request->only('username', 'password');
                     if (Auth::attempt($credensial)) {
-                        $request->session()->regenerate();
                         $user = Auth::user();
 
                         if ($user->role == 1) {
+                            $request->session()->regenerate();
+
                             return redirect()->intended('/');
+                        } elseif ($user->role == 2) {
+                            $request->session()->regenerate();
+
+                            return redirect()->intended('/register');
                         }
                     }
-                    
                 } else {
                     return redirect()->back()->with('alert', 'Username/Password , Salah !');
                 }
             } else {
                 return redirect()->back()->with('alert', 'Username/Password , Salah !');
             }
-            
         }
     }
 
