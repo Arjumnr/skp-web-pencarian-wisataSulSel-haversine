@@ -43,22 +43,17 @@ class LoginController extends Controller
             return redirect()->back()->withErrors($cek)->withInput();
         } else {
             $dataUser = ModelUser::where('username', $request->username)->first();
-
             if ($dataUser) {
-
                 if (Hash::check($request->password, $dataUser->password)) {
 
                     $credensial = $request->only('username', 'password');
                     if (Auth::attempt($credensial)) {
                         $user = Auth::user();
+                        $request->session()->regenerate();
 
                         if ($user->role == 1) {
-                            $request->session()->regenerate();
-
                             return redirect()->intended('/');
                         } elseif ($user->role == 2) {
-                            $request->session()->regenerate();
-
                             return redirect()->intended('/register');
                         }
                     }

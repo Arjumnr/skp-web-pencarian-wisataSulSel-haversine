@@ -22,6 +22,7 @@ class CekRole
         }
 
         $user = Auth::user();
+       
         if ($user->role == $rules) {
             return $next($request);
         }

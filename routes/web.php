@@ -32,20 +32,19 @@ Route::post('/authh', [LoginController::class, 'authenticate'])->name('loginPost
 
 // midelware 
 Route::group(['middleware' => ['auth']], function () {
-    // dd(['auth']);
-    Route::group(['middleware' => ['cekRole:{1}']], function () {
+    // dd(['cekRole:1']);
+    Route::group(['middleware' => ['cekRole:1']], function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         //WISATA
-        
+        Route::group(['prefix' => '/wisata'], function () {
+            Route::get('/', [WisataController::class, 'index'])->name('indexWisata');
+        });
     });
 
-    // Route::group(['prefix' => '/wisata'], function () {
-    //     Route::get('/', [WisataController::class, 'index'])->name('indexWisata');
-    // });
+    
 
-
-    Route::group(['middleware' => ['cekRole:{2}']], function () {
+    Route::group(['middleware' => ['cekRole:2']], function () {
         Route::get('/register', [UserController::class, 'index'])->name('indexUser');
     });
 
