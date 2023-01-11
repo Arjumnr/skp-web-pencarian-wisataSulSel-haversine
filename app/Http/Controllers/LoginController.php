@@ -17,17 +17,15 @@ class LoginController extends Controller
     {
         if ($user = Auth::user()) {
             if ($user->role == 1) {
-                return redirect()->intended('dashboard');
+                return redirect()->intended('/');
             }
         }
         return view('login');
     }
 
 
-
     public function authenticate(Request $request)
     {
-
         $cek = $request->validate(
             [
                 'username' => 'required',
@@ -43,17 +41,26 @@ class LoginController extends Controller
             return redirect()->back()->withErrors($cek)->withInput();
         } else {
             $dataUser = ModelUser::where('username', $request->username)->first();
+
             if ($dataUser) {
+
                 if (Hash::check($request->password, $dataUser->password)) {
-                    if ($dataUser->role == 1) {
-                        Auth::login($dataUser);
-                        return redirect()->intended('dashboard');
+
+                    $credensial = $request->only('username', 'password');
+                    if (Auth::attempt($credensial)) {
+                        $request->session()->regenerate();
+                        $user = Auth::user();
+
+                        if ($user->role == 1) {
+                            return redirect()->intended('/');
+                        }
                     }
+                    
                 } else {
-                    return redirect()->back()->with('danger', 'Username atau Password, Salah !');
+                    return redirect()->back()->with('alert', 'Username/Password , Salah !');
                 }
             } else {
-                return redirect()->back()->with('danger', 'Username atau Password, Salah !');
+                return redirect()->back()->with('alert', 'Username/Password , Salah !');
             }
             
         }

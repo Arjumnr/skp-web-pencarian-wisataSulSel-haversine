@@ -28,20 +28,25 @@ use Illuminate\Http\Request;
 // Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('authh', [LoginController::class, 'authenticate'])->name('loginPost');
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 // midelware 
-// Route::group(['middleware' => ['auth']], function () {
-//     Route::get('/wisata', [WisataController::class, 'index'])->name('indexWisata');
-//     Route::get('/user', [UserController::class, 'index'])->name('indexUser');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+//    Route::group(['middleware' => ['cekRole'], function(){
+//     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+//    }]);
     
-// });
+});
 Route::get('/wisata', [WisataController::class, 'index'])->name('indexWisata');
 Route::get('/user', [UserController::class, 'index'])->name('indexUser');
 // Route::get('/login', [LoginController::class, 'index'])->name('login');
 // Route::post('/login', [LoginController::class, 'authenticate'])->name('loginPost');
+
+
+
 
 Route::get('/tes', function()
 {
