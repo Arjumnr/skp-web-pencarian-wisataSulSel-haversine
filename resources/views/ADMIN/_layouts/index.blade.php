@@ -15,9 +15,5 @@
         <div class="content-body">
             @yield('content')
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-
-
+       
         @include('ADMIN._layouts.footer')

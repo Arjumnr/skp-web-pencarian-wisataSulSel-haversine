@@ -22,21 +22,48 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <h4 class="text-center mb-4">Login</h4>
-                                    <form action="" method="POST">
+
+                                    @if (Session::has('danger'))
+                                        <div class="alert alert-danger">
+                                            {{ Session::get('danger') }}
+                                            @php
+                                                Session::forget('danger');
+                                            @endphp
+                                        </div>
+                                    @endif
+
+                                    <form action="{{ route('loginPost') }}" method="POST">
+                                        @csrf
                                         <div class="form-group">
                                             <label for="username"><strong>Username</strong></label>
-                                            <input type="text" id="username" class="form-control" autofocus>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password"><strong>Password</strong></label>
-                                            <input type="password"  id="password" class="form-control" >
-                                        </div>
-                                        
-                                        <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Masuk</button>
-                                        </div>
+                                            <input type="text" id="username" class="form-control"
+                                                name="username"</div>
+
+                                            @if ($errors->has('username'))
+                                                <span class="text-danger">{{ $errors->first('username') }}</span>
+                                            @endif
+                                            <br>
+                                            <br>
+
+                                            <div class="form-group">
+                                                <label for="password"><strong>Password</strong></label>
+                                                <input type="password" name="password" id="password"
+                                                    class="form-control">
+                                            </div>
+
+                                            @if ($errors->has('password'))
+                                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                            @endif
+
+                                            <br>
+                                            <br>
+                                            <div class="text-center">
+                                                <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+                                            </div>
+
+
                                     </form>
-                                    
+
                                 </div>
                             </div>
                         </div>

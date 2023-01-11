@@ -18,10 +18,9 @@ class AkunSeeder extends Seeder
         $user = [
             [
                 'username' => 'admin',
-                'level' => 'admin',
                 'password' => bcrypt('123'),
+                'role' => 1,
             ],
-            
         ];
 
         foreach ($user as $key => $value) {

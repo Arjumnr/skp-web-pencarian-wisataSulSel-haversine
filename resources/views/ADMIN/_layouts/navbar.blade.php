@@ -23,7 +23,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             
-                            <a href="{{ route('login') }}" class="dropdown-item">
+                            <a href="{{ route('logout') }}" class="dropdown-item">
                                 <i class="icon-key"></i>
                                 <span class="ml-2">Logout </span>
                             </a>
