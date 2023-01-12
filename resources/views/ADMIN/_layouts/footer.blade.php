@@ -36,6 +36,10 @@
 
 <script src="{{ asset('templates/js/dashboard/dashboard-1.js') }}"></script>
 
+{{-- Data TAble --}}
+<script src="{{ asset('templates/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('templates/js/plugins-init/datatables.init.js') }}"></script>
+
 </body>
 
 </html>

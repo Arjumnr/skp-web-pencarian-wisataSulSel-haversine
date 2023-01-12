@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WisataController;
 use Illuminate\Contracts\Session\Session;
@@ -28,24 +29,31 @@ use Illuminate\Http\Request;
 // Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/authh', [LoginController::class, 'authenticate'])->name('loginPost');
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::get('/registerPost', [RegisterController::class, 'index'])->name('registerPost');
 
 
 // midelware 
 Route::group(['middleware' => ['auth']], function () {
     // dd(['cekRole:1']);
     Route::group(['middleware' => ['cekRole:1']], function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         //WISATA
         Route::group(['prefix' => '/wisata'], function () {
             Route::get('/', [WisataController::class, 'index'])->name('indexWisata');
+        });
+
+        //USER
+        Route::group(['prefix' => '/user'], function () {
+            Route::get('/', [UserController::class, 'index'])->name('indexUser');
         });
     });
 
     
 
     Route::group(['middleware' => ['cekRole:2']], function () {
-        Route::get('/register', [UserController::class, 'index'])->name('indexUser');
+        // Route::get('/user', [UserController::class, 'index'])->name('indexUser');
     });
 
 

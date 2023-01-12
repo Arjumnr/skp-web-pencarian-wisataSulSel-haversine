@@ -17,7 +17,7 @@ class LoginController extends Controller
     {
         if ($user = Auth::user()) {
             if ($user->role == 1) {
-                return redirect()->intended('/');
+                return redirect()->intended('/dashboard');
             } elseif ($user->role == 2) {
                 return redirect()->intended('/register');
             }
@@ -52,7 +52,7 @@ class LoginController extends Controller
                         $request->session()->regenerate();
 
                         if ($user->role == 1) {
-                            return redirect()->intended('/');
+                            return redirect()->intended('/dashboard');
                         } elseif ($user->role == 2) {
                             return redirect()->intended('/register');
                         }
