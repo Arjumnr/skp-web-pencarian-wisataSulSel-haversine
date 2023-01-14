@@ -18,7 +18,7 @@
                 <ul class="navbar-nav header-right">
                     <li class="nav-item dropdown header-profile">
                         <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                            <label for="">{{ $user->username }}</label>
+                            <label for="">{{ $user->name }}</label>
                             <i class="mdi mdi-account"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">

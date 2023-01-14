@@ -26,7 +26,7 @@ use Illuminate\Http\Request;
 //     return view('welcome');
 // });
 
-// Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [UserController::class, 'index'])->name('index');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/authh', [LoginController::class, 'authenticate'])->name('loginPost');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
         //USER
         Route::group(['prefix' => '/user'], function () {
             Route::get('/', [UserController::class, 'index'])->name('indexUser');
+            // Route::get('/users', [UserController::class, 'getDataUser'])->name('getDataUser');
         });
     });
 

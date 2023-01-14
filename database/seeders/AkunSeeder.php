@@ -17,12 +17,14 @@ class AkunSeeder extends Seeder
     {
         $user = [
             [
+                'name' => ' Pak Admin',
                 'username' => 'admin',
                 'password' => bcrypt('123'),
                 'role' => 1,
             ],
 
             [
+                'name' => 'Pak tourgide',
                 'username' => 'tg',
                 'password' => bcrypt('123'),
                 'role' => 2,

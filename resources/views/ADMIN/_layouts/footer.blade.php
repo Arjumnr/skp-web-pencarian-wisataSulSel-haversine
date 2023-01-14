@@ -34,12 +34,14 @@
 <script src="{{ asset('templates/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
 
 
-<script src="{{ asset('templates/js/dashboard/dashboard-1.js') }}"></script>
+{{-- <script src="{{ asset('templates/js/dashboard/dashboard-1.js') }}"></script> --}}
 
 {{-- Data TAble --}}
 <script src="{{ asset('templates/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('templates/js/plugins-init/datatables.init.js') }}"></script>
 
 </body>
+
+@yield('script')
 
 </html>
