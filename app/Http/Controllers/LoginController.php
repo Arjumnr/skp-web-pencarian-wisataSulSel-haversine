@@ -19,7 +19,7 @@ class LoginController extends Controller
             if ($user->role == 1) {
                 return redirect()->intended('/dashboard');
             } elseif ($user->role == 2) {
-                return redirect()->intended('/register');
+                return redirect()->intended('/dashboard');
             }
         }
         return view('login');

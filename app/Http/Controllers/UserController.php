@@ -13,7 +13,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        
+
         if ($request->ajax()) {
             $dataUser = User::all();
             return DataTables::of($dataUser)->addIndexColumn()->addColumn(
@@ -26,15 +26,69 @@ class UserController extends Controller
                 }
             )->make(true);
         }
-        
-        return view('ADMIN.user')->with(
+
+        return view('ADMIN.users.index')->with(
             [
                 'user' => Auth::user(),
+            ],
+
+        );
+    }
+
+    public function store(Request $request)
+    {
+
+        User::updateOrCreate(
+            ['id' => $request->id],
+            [
+                'name' => $request->name,
+                'username' => $request->username,
+                'password' => bcrypt($request->password),
+                'role' => $request->role,
             ]
         );
-        
-    }
-   
 
-   
+        return response()->json(['success' => 'Post saved successfully.']);
+    }
+
+    public function edit($id)
+    {
+        $dataUser = User::find($id);
+        return response()->json($dataUser);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $dataUser = User::find($id);
+        $cekUsername = User::where('username', $request->username)->first();
+        if ($cekUsername) {
+            if ($cekUsername->id != $id) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Username sudah digunakan'
+                ]);
+            }
+        }
+
+        $dataUser->update(
+            [
+                'name' => $request->name,
+                'username' => $request->username,
+                'password' => bcrypt($request->password),
+                'role' => $request->role,
+            ]
+        );
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data berhasil diubah',
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $dataUser = User::find($id);
+        $dataUser->delete();
+
+        return response()->json(['success' => 'Post deleted successfully.']);
+    }
 }

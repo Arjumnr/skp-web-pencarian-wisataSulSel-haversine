@@ -12,8 +12,5 @@
     <link rel="stylesheet" href="{{ asset('templates/vendor/owl-carousel/css/owl.theme.default.min.css') }}">
     <link href="{{ asset('templates/vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet') }}">
     <link href="{{ asset('templates/css/style.css') }}" rel="stylesheet">
-
-
-
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/metismenu/dist/metisMenu.min.css">
 </head>

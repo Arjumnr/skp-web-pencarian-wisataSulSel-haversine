@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 
 use Illuminate\Http\Request;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +28,7 @@ use Illuminate\Http\Request;
 //     return view('welcome');
 // });
 
-Route::get('/', [UserController::class, 'index'])->name('index');
+// Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/authh', [LoginController::class, 'authenticate'])->name('loginPost');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
@@ -45,16 +47,20 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         //USER
-        Route::group(['prefix' => '/user'], function () {
-            Route::get('/', [UserController::class, 'index'])->name('indexUser');
-            // Route::get('/users', [UserController::class, 'getDataUser'])->name('getDataUser');
-        });
+        Route::resource('user', UserController::class);
+        // Route::group(['prefix' => '/user'], function () {
+        //     Route::get('/', [UserController::class, 'index'])->name('indexUser');
+        //     // Route::get('/users', [UserController::class, 'getDataUser'])->name('getDataUser');
+        // });
     });
 
     
 
     Route::group(['middleware' => ['cekRole:2']], function () {
         // Route::get('/user', [UserController::class, 'index'])->name('indexUser');
+        // Route::group(['prefix' => '/wisata'], function () {
+        //     Route::get('/', [WisataController::class, 'index'])->name('indexWisata');
+        // });
     });
 
 
