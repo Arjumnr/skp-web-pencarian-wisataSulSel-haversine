@@ -12,6 +12,7 @@
 </head>
 
 <body class="h-100">
+    @include('sweetalert::alert')
     <div class="authincation h-100">
         <div class="container-fluid h-100">
             <div class="row justify-content-center h-100 align-items-center">
@@ -25,15 +26,17 @@
                                         @csrf
                                         <div class="form-group">
                                             <label><strong>Username</strong></label>
-                                            <input type="text" class="form-control" placeholder="username">
-                                        </div>
-                                        <div class="form-group">
-                                            <label><strong>Email</strong></label>
-                                            <input type="email" class="form-control" placeholder="hello@example.com">
+                                            <input type="text" class="form-control" name="username">
+                                            @if ($errors->has('username'))
+                                                <span class="text-danger">{{ $errors->first('username') }}</span>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Password</strong></label>
-                                            <input type="password" class="form-control">
+                                            <input type="password" class="form-control" name="password">
+                                            @if ($errors->has('password'))
+                                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                            @endif
                                         </div>
                                         <div class="text-center mt-4">
                                             <button type="submit" class="btn btn-primary btn-block">Daftar</button>
@@ -55,6 +58,8 @@
     <!-- Required vendors -->
     <script src="{{ asset('templates/vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('templates/js/quixnav-init.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <!--endRemoveIf(production)-->
 </body>
 

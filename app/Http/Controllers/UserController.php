@@ -13,6 +13,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
+        
 
         if ($request->ajax()) {
             $dataUser = User::all();
@@ -37,7 +38,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-
         User::updateOrCreate(
             ['id' => $request->id],
             [

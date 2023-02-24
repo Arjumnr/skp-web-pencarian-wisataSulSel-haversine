@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\Apps\IndexController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WisataController;
+use App\Http\Controllers\Tourguide\tgDashboardController;
+use App\Http\Controllers\Tourguide\tgProfilController;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
+use Stevebauman\Location\Facades\Location;
 
 
 use Illuminate\Http\Request;
@@ -28,16 +32,20 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 //     return view('welcome');
 // });
 
-// Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [IndexController::class, 'index'])->name('index');
+// Route::get('/', function () {
+//     dd(Location::get(request()->ip()));
+// });
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/authh', [LoginController::class, 'authenticate'])->name('loginPost');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::get('/registerPost', [RegisterController::class, 'index'])->name('registerPost');
+Route::post('/register', [RegisterController::class, 'store'])->name('registerPost');
 
 
 // midelware 
 Route::group(['middleware' => ['auth']], function () {
     // dd(['cekRole:1']);
+
     Route::group(['middleware' => ['cekRole:1']], function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -54,9 +62,13 @@ Route::group(['middleware' => ['auth']], function () {
         // });
     });
 
-    
+
 
     Route::group(['middleware' => ['cekRole:2']], function () {
+        Route::get('/dashboardtg', [tgDashboardController::class, 'index'])->name('tgDashboard');
+        Route::get('/tg-profil', [tgProfilController::class, 'index'])->name('tgProfil');
+        Route::post('/update-profil', [tgProfilController::class, 'update'])->name('postProfil');
+
         // Route::get('/user', [UserController::class, 'index'])->name('indexUser');
         // Route::group(['prefix' => '/wisata'], function () {
         //     Route::get('/', [WisataController::class, 'index'])->name('indexWisata');
@@ -70,6 +82,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
+
+Route::get('/log', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
 
 

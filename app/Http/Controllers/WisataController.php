@@ -9,7 +9,7 @@ class WisataController extends Controller
 {
     public function index()
     {
-        return view('ADMIN.wisata')->with([
+        return view('ADMIN.wisata.index')->with([
             'user' => Auth::user(),
         ]);
     }
