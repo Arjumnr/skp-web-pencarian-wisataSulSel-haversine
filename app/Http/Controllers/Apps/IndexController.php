@@ -4,25 +4,24 @@ namespace App\Http\Controllers\Apps;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Stevebauman\Location\Facades\Location;
 
 class IndexController extends Controller
 {
     public function index()
     {
 
-        //tampilkan lokasi saya 
-        $ip = request()->ip();
-        $location = Location::get($ip);
-        $lat = $location->latitude;
-        $long = $location->longitude;
         $initialMarkers = [
+           // pantai losari || bugis waterpark 
             [
-                'title' => 'Lokasi Saya',
-                'lat' => $lat,
-                'lng' => $long,
-                'description' => 'Lokasi Saya',
-                'icon' => 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                'title' => 'Pantai Losari',
+                'lat' =>  -5.14018573065,
+                'lng' => 119.406559467
+            ],
+            // pantai losari || bugis waterpark 
+            [
+                'title' => 'Bugis Waterpark',
+                'lat' =>  -5.15430183771,
+                'lng' => 119.493916333
             ],
         ];
         return view('APPS._layouts.index', compact('initialMarkers'));

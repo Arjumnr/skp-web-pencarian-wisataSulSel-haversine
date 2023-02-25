@@ -12,6 +12,8 @@
     <section class="section-header">
         <div class="section-header-image">
             <img src="{{ asset('theme/img/header.jpg') }}" alt="Header">
+
+
         </div>
         <div class="container">
             <div class="section-header-inner">
@@ -25,6 +27,7 @@
                     <p>Telusuri Keindahan Bali Yang <br> Belum Pernah Anda Temui Sebelumnya</p>
                     <a href="" class="btn btn-round btn-orange">See Our Vacation</a>
                 </div>
+
             </div>
         </div>
     </section>
@@ -38,31 +41,34 @@
                 mulai tiket Tour dan tempat penginapan di sekitar Bali </p>
         </div> --}}
         <div class="about-body">
-            <div class="row slides">
 
-                {{-- <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1875.383062934892!2d119.47859237263908!3d-5.13619122650249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1677099749593!5m2!1sid!2sid"
-                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
-                <div id="map" style="height: 500px; width: 100%;"></div>
-                {{-- maps --}}
+            {{-- <div class="about-head slides">
+                
+                
+            </div> --}}
 
-                {{-- <div class="col">
-                    <img src="img/About/035-trekking.png">
-                    <h2>ADVENTURE</h2>
-                    <p>Dapatkan pengalaman berpetualang yang belum pernah anda rasakan sebelumnya hanya di Bali</p>
-                </div>
-                <div class="col">
-                    <img src="img/About/028-book.png">
-                    <h2>GUIDE</h2>
-                    <p>Kami memberikan info - info seputar Bali mulai dari event dan destinasi terbaik</p>
-                </div>
-                <div class="col">
-                    <img src="img/About/024-tent.png">
-                    <h2>STAY</h2>
-                    <p>Anda tidak perlu kawatir akan menetap dimana karna kami menyediakan tiket Hotel terbaik</p>
+            <div class="container">
+                {{-- <div class="row justify-content-md-center">
+                    <div id="map" style="height: 500px; width: 50%;"></div>
+                    <div class="col col-lg-2">
+                        <div id="listLokasi">
+
+                        </div>
+
+                    </div>
                 </div> --}}
+
+                <div id="container">
+                    <div id="map"></div>
+                    <div id="sidebar">
+                        <p>Total Distance: <span id="total"></span></p>
+                        <div id="panel"></div>
+                    </div>
+                </div>
             </div>
+
+
+
         </div>
     </section>
 
@@ -487,61 +493,136 @@
         // var long = parseFloat(data[0].long);
         // var icon = data[0].icon;
         // let map, infoWindow;
+        let map;
+        var markers = [];
+        var contents = [];
+        var infowindows = [];
+        var dataToMake = {!! json_encode($initialMarkers) !!};
+
 
         function initMap() {
 
-            //get locaation now
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    console.log(position);
-                    var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                        zoom : 13,
-                    };
-                   
-                    const map = new google.maps.Map(document.getElementById("map"), {
-                        center: {
-                            lat: pos.lat,
-                            lng: pos.lng
-                        },
-                        zoom: pos.zoom,
-                    });
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer({
+                draggable: true,
+                map,
+                panel: document.getElementById("panel"),
+            });
 
-                    const maker = new google.maps.Marker({
-                        position: {
-                            lat: pos.lat,
-                            lng: pos.lng
-                        },
-                        map,
-                        //title from in location name terdekat 
-                        title: "Hello World!",
-                        icon: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
-                    });
-                    // infoWindow.setPosition(pos);
-                    // infoWindow.setContent('Location found.');
-                    // infoWindow.open(map);
-                    // map.setCenter(new google.maps.LatLng(pos.lat, pos.lng));
-                    // map.setZoom(pos.zoom);
 
-                    // const maker = new google.maps.Marker({
-                    //     position: {
-                    //         lat: pos.lat,
-                    //         lng: pos.lng
-                    //     },
-                    //     map,
-                    //     title: "Hello World!",
-                    //     icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                    // });
-                }, function () {
-                    handleLocationError(true, infoWindow, map.getCenter());
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: {
+                    lat: -5.135399,
+                    lng: 119.423790
+                },
+                zoom: 10,
+                // disableDefaultUI: true,
+            });
+
+
+
+            for (var i = 0; i < dataToMake.length; i++) {
+                var lat = parseFloat(dataToMake[i].lat);
+                var long = parseFloat(dataToMake[i].lng);
+                var icon = dataToMake[i].icon;
+                
+                // var content = dataToMake[i].content;
+
+                // var id = dataToMake[i].id;
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: lat,
+                        lng: long
+                    },
+                    map: map,
+                    icon: icon,
+                    title: dataToMake[i].title,
+
                 });
-            } else {
-                // Browser doesn't support Geolocation
-                handleLocationError(false, infoWindow, map.getCenter());
-            }
+            
+                markers.push(marker);
 
-        
+                //hendel event click location 
+                marker. addListener('click', function() {
+                    
+                });
+
+
+
+            }
+            infoWindow = new google.maps.InfoWindow();
+
+
+            const locationButton = document.createElement("button");
+
+            locationButton.textContent = "Klik Untuk Mendapatkan Lokasi Anda";
+            locationButton.classList.add("custom-map-control-button");
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+            locationButton.addEventListener("click", () => {
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            console.log(position);
+                            const pos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude,
+                                zoom: 13,
+                            };
+
+                            infoWindow.setPosition(pos);
+                            infoWindow.setContent(
+                                " <img src='https://maps.google.com/mapfiles/ms/icons/blue-dot.png' width='20px' height='20px'> Lokasi Anda"
+                            );
+                            infoWindow.open(map);
+                            map.setCenter(pos);
+                            directionsRenderer.setMap(map);
+                            displayRoute(
+                                pos,
+                            //    destination,
+                                directionsService,
+                                directionsRenderer
+                            );
+                            
+
+                        },
+                        () => {
+                            handleLocationError(true, infoWindow, map.getCenter());
+                        }
+                    );
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
+            });
+
+
+        }
+
+        function displayRoute (origin, destination, service, display) {
+            service.route({
+                origin: origin,
+                destination: destination,
+                waypoints: [],
+                travelMode: 'DRIVING',
+                avoidTolls: true
+            }, function(response, status) {
+                if (status === 'OK') {
+                    display.setDirections(response);
+                } else {
+                    alert('Could not display directions due to: ' + status);
+                }
+            });
+        }
+
+        function computeTotalDistance(result) {
+            var total = 0;
+            var myroute = result.routes[0];
+            for (var i = 0; i < myroute.legs.length; i++) {
+                total += myroute.legs[i].distance.value;
+            }
+            total = total / 1000;
+            document.getElementById('total').innerHTML = total + ' km';
         }
 
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
