@@ -2,16 +2,17 @@
 	<div class="container">
 		<div class="navbar-bars">
 			<a href="#" class="navbar-title sidebar-toggle" style="padding: 0;"><i class="ion-navicon-round"></i></a>
-        	<a href="index.html" class="navbar-title">Bali Travel Time</a>
+        	<a href="{{ route('index') }}" class="navbar-title">Pariwisata Makassar</a>
 		</div>
 		<div class="navbar-item">
-			<a href="index.html" class="navbar-title">Bali Travel Time</a>
+			<a href="{{ route('index') }}" class="navbar-title">Pariwisata Makassar</a>
 			<ul>
-		        <li><a href="destination.html">Destination</a></li>
-			    <li><a href="gallery.html">Gallery</a></li>
-			    <li><a data-slide="slides" data-slide-target="#discover">Discover</a></li>
-			    <li><a href="news.html"> News</a></li>
-				<li><button class="btn-login" id="openLogin">LOGIN</button></li>
+		        <li><a href="{{ route('index') }}">Beranda</a></li>
+			    <li><a href="{{ route('fotoWisata') }}">Spot Foto </a></li>
+			    <li><a href="{{ route('kulinerWisata') }}">Kuliner </a></li>
+			    {{-- <li><a data-slide="slides" data-slide-target="#discover">Discover</a></li> --}}
+			    {{-- <li><a href="news.html"> News</a></li> --}}
+				<a href="{{ route('login') }}"><li><button class="btn-login">LOGIN TOURGUIDE</button></li></a>
   		  	</ul>
 		</div>
 	</div>

@@ -42,6 +42,8 @@
         #container {
             height: 100%;
             display: flex;
+            justify-content: center;
+
         }
 
         #sidebar {

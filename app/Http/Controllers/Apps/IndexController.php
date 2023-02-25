@@ -24,6 +24,6 @@ class IndexController extends Controller
                 'lng' => 119.493916333
             ],
         ];
-        return view('APPS._layouts.index', compact('initialMarkers'));
+        return view('APPS.index', compact('initialMarkers'));
     }
 }

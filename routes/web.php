@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Apps\FotoController;
 use App\Http\Controllers\Apps\IndexController;
+use App\Http\Controllers\Apps\KulinerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
@@ -33,6 +35,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 // });
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::get('/wisata-foto', [FotoController::class, 'index'])->name('fotoWisata');
+Route::get('/wisata-kuliner', [KulinerController::class, 'index'])->name('kulinerWisata');
 // Route::get('/', function () {
 //     dd(Location::get(request()->ip()));
 // });
@@ -40,6 +44,8 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/authh', [LoginController::class, 'authenticate'])->name('loginPost');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('registerPost');
+
+
 
 
 // midelware 
