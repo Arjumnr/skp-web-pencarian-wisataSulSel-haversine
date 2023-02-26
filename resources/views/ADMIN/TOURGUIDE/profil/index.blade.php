@@ -16,80 +16,144 @@
         </div>
         <div class="row">
             <div class="card col-12">
-                <div class="card-header">
-                    <h4 class="card-title">Profil Tourguide</h4>
+                <br><br>
+                <div class="row justify-content-center">
+                    <div class="card " style="width: 18rem;">
+                        <img class="card-img-top" src="{{ asset('theme/img/f-foto.jpeg') }}" alt="Card image cap">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Profil Tourguide</h4>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#exampleModalLong">
+                                Update Foto
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Modal  --}}
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Update Foto Profil Wisata
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="{{ route('updateFP') }}">
+                                    @csrf
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="foto_profil_wisata"
+                                            value="{{ $tourguide->foto_profil_wisata }}">
+                                        <label class="custom-file-label">Choose file</label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="basic-form">
                         <form method="POST" action="{{ route('postProfil') }}">
                             @csrf
+
+
+
                             <div class="form-row">
+
                                 <div class="form-group col-md-6">
                                     <label for="username">Username</label>
-                                    <input type="text" class="form-control" disabled name="username" value="{{ $tourguide->username }}">
+                                    <input type="text" class="form-control" disabled name="username"
+                                        value="{{ $tourguide->username }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Password</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" name="password" value="{{ $tourguide->password }}"/>
+                                        <input type="password" class="form-control" name="password"
+                                            value="{{ $tourguide->password }}" />
                                         <div class="input-group-append">
-                                            <span class="input-group-text" id="basic-addon2"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                                            <span class="input-group-text" id="basic-addon2"><i class="fa fa-eye-slash"
+                                                    aria-hidden="true"></i></span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Nama Wisata</label>
-                                    <input type="text" class="form-control" name="nama_wisata" value="{{ $tourguide->nama_wisata }} ">
+                                    <input type="text" class="form-control" name="nama_wisata"
+                                        value="{{ $tourguide->nama_wisata }} ">
                                 </div>
+                                {{-- foto profil wisata  --}}
+                                {{-- <div class="form-group col-md-6">
+                                    <label>Foto Profil Wisata</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="foto_profil_wisata" value="{{ $tourguide->foto_profil_wisata }}">
+                                        <label class="custom-file-label">Choose file</label>
+                                        <a href="">Lihat Gambar</a>
+                                    </div>
+                                </div> --}}
 
                                 <div class="form-group col-md-6">
                                     <label>No. Telpon/WhatsApp</label>
-                                    <input type="number" class="form-control" name="no_telp" value="{{ $tourguide->no_telp }}">
+                                    <input type="number" class="form-control" name="no_telp"
+                                        value="{{ $tourguide->no_telp }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" name="email" value="{{ $tourguide->email }}">
+                                    <input type="email" class="form-control" name="email"
+                                        value="{{ $tourguide->email }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Alamat</label>
-                                    <input type="tetx" class="form-control" name="alamat" value="{{ $tourguide->alamat }}">
+                                    <input type="tetx" class="form-control" name="alamat"
+                                        value="{{ $tourguide->alamat }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Latitude</label>
-                                    <input type="text" class="form-control" name="latitude" value="{{ $tourguide->latitude }}">
+                                    <input type="text" class="form-control" name="latitude"
+                                        value="{{ $tourguide->latitude }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Longitude</label>
-                                    <input type="text" class="form-control" name="longitude" value="{{ $tourguide->longitude }}">
+                                    <input type="text" class="form-control" name="longitude"
+                                        value="{{ $tourguide->longitude }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Jam Buka</label>
-                                    <input type="time" class="form-control" name="jam_buka" value="{{ $tourguide->jam_buka  }}">
+                                    <input type="time" class="form-control" name="jam_buka"
+                                        value="{{ $tourguide->jam_buka }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Jam Tutup</label>
-                                    <input type="time" class="form-control" name="jam_tutup" value="{{ $tourguide->jam_tutup }}">
+                                    <input type="time" class="form-control" name="jam_tutup"
+                                        value="{{ $tourguide->jam_tutup }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Deskripsi</label>
-                                    <textarea class="form-control" rows="4" name="deskripsi" value=" {{  $tourguide->deskripsi }} "></textarea>
+                                    <textarea class="form-control" rows="4" name="deskripsi" value=" {{ $tourguide->deskripsi }} "></textarea>
                                 </div>
 
                                 <div class="col-md-6 d-flex flex-column  justify-content-center align-items-center">
-                                        {{-- button edit  --}}
-                                        <button type="button" class="btn btn-warning" id="btnEdit">Edit</button>
-                                        {{-- button hapus --}}
-                                        {{-- button simpan --}}
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    {{-- button edit  --}}
+                                    <button type="button" class="btn btn-warning" id="btnEdit">Edit</button>
+                                    {{-- button hapus --}}
+                                    {{-- button simpan --}}
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
 
                             </div>
@@ -104,7 +168,7 @@
 
 @section('script')
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
 
             //set format input time
             $('input[type="time"]').attr('type', 'text');
@@ -118,15 +182,15 @@
                 dynamic: false,
                 dropdown: true,
                 scrollbar: true
-            }); 
+            });
 
-             //show hidden passsword
-            $('.input-group-append').click(function(){
-                if($(this).find('i').hasClass('fa-eye-slash')){
+            //show hidden passsword
+            $('.input-group-append').click(function() {
+                if ($(this).find('i').hasClass('fa-eye-slash')) {
                     $(this).find('i').removeClass('fa-eye-slash');
                     $(this).find('i').addClass('fa-eye');
                     $(this).parent().find('input').attr('type', 'text');
-                }else{
+                } else {
                     $(this).find('i').removeClass('fa-eye');
                     $(this).find('i').addClass('fa-eye-slash');
                     $(this).parent().find('input').attr('type', 'password');
@@ -139,9 +203,9 @@
 
             //hidden button simpan
             $('button[type="submit"]').hide();
-            
+
             //button edit
-            $('#btnEdit').click(function(){
+            $('#btnEdit').click(function() {
                 $('input').attr('disabled', false);
                 $('textarea').attr('disabled', false);
                 $('button[type="submit"]').show();
@@ -153,7 +217,7 @@
             // $('form').submit(function(e){
             //     e.preventDefault();
             //     var data = $(this).serialize();
-               
+
             //     $.ajax({
             //         url: "{{ url('/update-profil') }}",
             //         type: "POST",
@@ -181,10 +245,10 @@
             //             //     });
             //             // }
             //         }
-                
+
             //     });
             // });
-           
+
         });
     </script>
 @endsection

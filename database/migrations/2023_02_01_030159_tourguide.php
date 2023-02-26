@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('users_id');
             $table->string('nama_wisata');
+            $table->string('fp_wisata');
             $table->string('no_telp');
             $table->string('alamat');
             $table->string('email');

@@ -12,7 +12,6 @@
 </head>
 
 <body class="h-100">
-    @include('sweetalert::alert')
     <div class="authincation h-100">
         <div class="container-fluid h-100">
             <div class="row justify-content-center h-100 align-items-center">
@@ -22,8 +21,17 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <h4 class="text-center mb-4">Daftar Akun</h4>
+                                    @include('sweetalert::alert')
+
                                     <form action="{{ route('registerPost') }}" method="POST">
                                         @csrf
+                                        <div class="form-group">
+                                            <label><strong>Nama Lengkap</strong></label>
+                                            <input type="text" class="form-control" name="name">
+                                            @if ($errors->has('name'))
+                                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                            @endif
+                                        </div>
                                         <div class="form-group">
                                             <label><strong>Username</strong></label>
                                             <input type="text" class="form-control" name="username">

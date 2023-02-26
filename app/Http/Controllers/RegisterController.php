@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\ModelTourguide;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -17,11 +19,13 @@ class RegisterController extends Controller
     {
         $cek = $request->validate(
             [
+                'name' => 'required',
                 'username' => 'required',
                 'password' => 'required',
             ],
             [
-                'username.required' => 'Nama tidak boleh kosong',
+                'name.required' => 'Nama tidak boleh kosong',
+                'username.required' => 'Username tidak boleh kosong',
                 'password.required' => 'Password tidak boleh kosong',
             ]
         );
@@ -29,31 +33,26 @@ class RegisterController extends Controller
         $dataUser = User::where('username', $request->username)->first();
             
         if ($dataUser) {
-            //toast
             return redirect()->back()->with('error', 'Username Sudah Terdaftar');
         } else {
-            // $data = [
-            //     'username' => $request->username,
-            //     'password' => $request->password,
-            //     'role' => 'user',
-            // ];
 
-            // User::create($data);
-            // Alert::success('Berhasil', 'Akun Berhasil Dibuat');
-            // return redirect()->route('login');
+            $dataUser = User::where('username', $request->username)->first();
+            if ($dataUser) {
+                Alert::error('Gagal', 'Username sudah digunakan');
+                return back();
+            } else {
+
+                $dataUser = new User();
+                $dataUser->name = $request->name;
+                $dataUser->username = $request->username;
+                $dataUser->password = Hash::make($request->password);
+                $dataUser->role = 2;
+                $dataUser->save();
+                
+                Alert::success('Berhasil', 'Akun berhasil dibuat');
+                return back();
+            }
         }
-    
-        
 
-        // if ($cek == false) {
-        //     //send error message to alert session status
-        //     return redirect()->back()->withErrors($cek)->withInput();
-        // } else {
-        //     $dataUser = User::where('username', $request->username)->first();
-
-        //     if ($dataUser){
-        //         Alert::error('Username Sudah Terdaftar');
-        //     }
-        // }
     }
 }
