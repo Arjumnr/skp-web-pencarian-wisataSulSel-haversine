@@ -256,12 +256,14 @@
                                         .position.lng())
                                 );
 
-                                var distance = distance / 1000;
-                                var distance = distance.toFixed(2);
+                                // var distance = distance / 1000;
+                                // var distance = distance.toFixed(2);
+                                
 
 
 
                                 document.getElementById("listLocation").innerHTML +=
+                                    // "<li>" + marker.title + " " + distance + " km" + " </li>";
                                     "<li>" + marker.title + " " + " </li>";
 
                                 marker.addListener("click", () => {

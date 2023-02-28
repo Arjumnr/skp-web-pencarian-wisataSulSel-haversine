@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('wisata_tg_id');
             $table->enum('kategori', ['spot_foto', 'kuliner']);
             $table->string('nama');
-            $table->binary('foto');
+            $table->string('foto');
             $table->string('deskripsi');
             $table->timestamps();
         });

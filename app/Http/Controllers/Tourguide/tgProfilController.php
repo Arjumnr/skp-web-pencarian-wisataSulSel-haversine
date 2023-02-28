@@ -22,28 +22,7 @@ class tgProfilController extends Controller
 
     public function update(Request $request)
     {
-        // dd ($request->all());
-        try {
-            //req pasword
-            $password = $request->password;
-            $cekUser = ModelUser::where('id', Auth::user()->id)->first();
-            //cek password
-            if ($password == '' || $password == $cekUser->password) {
-                $password = $cekUser->password;
-            } else {
-                $password = encrypt($password);
-            }
-            
-            
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Data Berhasil Diubah'
-            ]);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Data Gagal Diubah'
-            ]);
-        }
+        //validasi name, username, password, nama_wisata, fp_wisata, no_telp, alamat, email, deskripsi, latitude, longitude, jam_buka, jam_tutup, deskripsi
+
     }
 }

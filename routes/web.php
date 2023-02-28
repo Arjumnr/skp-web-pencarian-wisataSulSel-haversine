@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WisataController;
 use App\Http\Controllers\Tourguide\tgDashboardController;
 use App\Http\Controllers\Tourguide\tgProfilController;
+use App\Http\Controllers\Tourguide\tgWisataController;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
 use Stevebauman\Location\Facades\Location;
@@ -73,8 +74,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['cekRole:2']], function () {
         Route::get('/dashboardtg', [tgDashboardController::class, 'index'])->name('tgDashboard');
         Route::get('/tg-profil', [tgProfilController::class, 'index'])->name('tgProfil');
-        Route::post('/update-foto-profil', [tgProfilController::class, 'updateFoto'])->name('updateFP');
+        // Route::post('/update-foto-profil', [tgProfilController::class, 'updateFoto'])->name('updateFP');
         Route::post('/update-profil', [tgProfilController::class, 'update'])->name('postProfil');
+        Route::resource('tg-wisata', tgWisataController::class);
 
         // Route::get('/user', [UserController::class, 'index'])->name('indexUser');
         // Route::group(['prefix' => '/wisata'], function () {

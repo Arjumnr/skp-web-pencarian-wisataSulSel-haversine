@@ -10,7 +10,7 @@
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Profile</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">Profil</a></li>
                 </ol>
             </div>
         </div>
@@ -20,52 +20,14 @@
                 <div class="row justify-content-center">
                     <div class="card " style="width: 18rem;">
                         <img class="card-img-top" src="{{ asset('theme/img/f-foto.jpeg') }}" alt="Card image cap">
-                        <div class="card-body text-center">
-                            <h4 class="card-title">Profil Tourguide</h4>
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#exampleModalLong">
-                                Update Foto
-                            </button>
-                        </div>
                     </div>
                 </div>
 
-                {{-- Modal  --}}
-                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Update Foto Profil Wisata
-                                </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="POST" action="{{ route('updateFP') }}">
-                                    @csrf
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="foto_profil_wisata"
-                                            value="{{ $tourguide->foto_profil_wisata }}">
-                                        <label class="custom-file-label">Choose file</label>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="card-body">
                     <div class="basic-form">
                         <form method="POST" action="{{ route('postProfil') }}">
                             @csrf
-
-
-
                             <div class="form-row">
 
                                 <div class="form-group col-md-6">
@@ -91,15 +53,16 @@
                                     <input type="text" class="form-control" name="nama_wisata"
                                         value="{{ $tourguide->nama_wisata }} ">
                                 </div>
-                                {{-- foto profil wisata  --}}
-                                {{-- <div class="form-group col-md-6">
+
+                                <div class="form-group col-md-6">
                                     <label>Foto Profil Wisata</label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="foto_profil_wisata" value="{{ $tourguide->foto_profil_wisata }}">
+                                        <input type="file" class="custom-file-input" name="fp_wisata" id="myFile">
                                         <label class="custom-file-label">Choose file</label>
-                                        <a href="">Lihat Gambar</a>
                                     </div>
-                                </div> --}}
+                                </div>
+                                
+
 
                                 <div class="form-group col-md-6">
                                     <label>No. Telpon/WhatsApp</label>
@@ -169,7 +132,13 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            //show modal disable false to custom im=nput file
 
+            //undisebel input custom file
+            $('.custom-file-input').on('change', function() {
+                let fileName = $(this).val().split('\\').pop();
+                $(this).next('.custom-file-label').addClass("selected").html(fileName);
+            });
             //set format input time
             $('input[type="time"]').attr('type', 'text');
             $('input[type="time"]').timepicker({
@@ -197,7 +166,11 @@
                 }
             });
 
-            //disable input
+            //disable input selain file
+            // $('input[type="text"]').attr('disabled', true);
+            // $('input[type="number"]').attr('disabled', true);
+            // $('input[type="email"]').attr('disabled', true);
+            // $('input[type="password"]').attr('disabled', true);
             $('input').attr('disabled', true);
             $('textarea').attr('disabled', true);
 
@@ -208,10 +181,12 @@
             $('#btnEdit').click(function() {
                 $('input').attr('disabled', false);
                 $('textarea').attr('disabled', false);
+
                 $('button[type="submit"]').show();
                 $(this).hide();
 
             });
+
 
             //submit form
             // $('form').submit(function(e){

@@ -14,7 +14,7 @@
             </li>
 
             <li>
-                <a href="{{ route('indexWisata') }}" aria-expanded="false">
+                <a href="{{ url('/tg-wisata') }}" aria-expanded="false">
                     <i class="icon icon-world-2"></i><span class="nav-text">Wisata</span>
                 </a>
             </li>
