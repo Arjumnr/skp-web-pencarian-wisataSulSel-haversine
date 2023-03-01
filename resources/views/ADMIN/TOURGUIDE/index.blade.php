@@ -7,7 +7,7 @@
                     <div class="stat-widget-two card-body">
                         <div class="stat-content">
                             <div class="stat-text">Wisata Spot Foto</div>
-                            <div class="stat-digit">5</div>
+                            <div class="stat-digit">{{ $jumlahSpotFoto }}</div>
                         </div>
                         <div class="progress">
                             <div class="progress-bar progress-bar-warning w-50" role="progressbar" aria-valuenow="50"
@@ -22,7 +22,7 @@
                     <div class="stat-widget-two card-body">
                         <div class="stat-content">
                             <div class="stat-text">Wisata Kuliner</div>
-                            <div class="stat-digit">6</div>
+                            <div class="stat-digit">{{ $jumlahKuliner }}</div>
                         </div>
                         <div class="progress">
                             <div class="progress-bar progress-bar-danger w-65" role="progressbar" aria-valuenow="65"

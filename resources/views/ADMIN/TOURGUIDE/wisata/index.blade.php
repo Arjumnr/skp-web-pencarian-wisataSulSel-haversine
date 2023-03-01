@@ -66,7 +66,7 @@
                                     data: 'foto',
                                     name: 'foto',
                                     render: function(data, type, full, meta) {
-                                        return "<img src={{ URL::to('/') }}/images/" + data +
+                                        return "<img src={{ URL::to('/') }}/img/wisata/" + data +
                                             " width='70' class='img-thumbnail' />";
                                     },
                                 },

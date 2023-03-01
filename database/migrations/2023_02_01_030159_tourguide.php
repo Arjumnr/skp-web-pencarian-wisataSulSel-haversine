@@ -16,16 +16,16 @@ return new class extends Migration
         Schema::create('tourguide', function (Blueprint $table) {
             $table->id();
             $table->integer('users_id');
-            $table->string('nama_wisata');
-            $table->string('fp_wisata');
-            $table->string('no_telp');
-            $table->string('alamat');
-            $table->string('email');
-            $table->string('deskripsi');
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->time('jam_buka');
-            $table->time('jam_tutup');
+            $table->string('nama_wisata')->nullable();
+            $table->string('fp_wisata')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('email')->nullable();
+            $table->string('deskripsi')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
+            $table->time('jam_buka')->nullable();
+            $table->time('jam_tutup')->nullable();
             $table->timestamps();
         });
     }

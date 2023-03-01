@@ -19,20 +19,22 @@
                 <br><br>
                 <div class="row justify-content-center">
                     <div class="card " style="width: 18rem;">
-                        <img src="{{ asset('img/tourguide/'.$tourguide->fp_wisata) }}" class="card-img-top" alt="...">
+                        <img src="{{ $fp_wisata }}" class="card-img-top" alt="...">
                     </div>
                 </div>
 
                 <div class="card-body">
                     <div class="basic-form">
-                        <form method="POST"  enctype="multipart/form-data">
+                        {{-- <form method="POST"  enctype="multipart/form-data"> --}}
+                        <form method="POST"  enctype="multipart/form-data" action="{{ route('postProfil') }}">
+
                             @csrf
                             <div class="form-row">
 
                                 <div class="form-group col-md-6">
                                     <label for="username">Username</label>
                                     <input type="text" class="form-control" disabled name="username"
-                                        value="{{ $tourguide->user->username }}">
+                                        value="{{ $username }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
@@ -44,9 +46,15 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
+                                    <label>Nama Tourguide</label>
+                                    <input required type="text" class="form-control" name="name"
+                                        value="{{ $name }}" >
+                                </div>
+
+                                <div class="form-group col-md-6">
                                     <label>Nama Wisata</label>
                                     <input required type="text" class="form-control" name="nama_wisata"
-                                        value="{{ $tourguide->nama_wisata }}" >
+                                        value="{{ $nama_wisata }}" >
                                 </div>
 
                                 <div class="form-group col-md-6">
@@ -60,38 +68,38 @@
                                 <div class="form-group col-md-6">
                                     <label>No. Telpon/WhatsApp</label>
                                     <input required type="number" class="form-control" name="no_telp"
-                                        value="{{ $tourguide->no_telp }}">
+                                        value="{{ $no_telp }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Email</label>
                                     <input required type="email" class="form-control" name="email"
-                                        value="{{ $tourguide->email }}">
+                                        value="{{ $email }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Alamat</label>
                                     <input required type="tetx" class="form-control" name="alamat"
-                                        value="{{ $tourguide->alamat }}">
+                                        value="{{ $alamat }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Latitude</label>
                                     <input required type="text" class="form-control" name="latitude"
-                                        value="{{ $tourguide->latitude }}">
+                                        value="{{ $latitude }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Longitude</label>
                                     <input required type="text" class="form-control" name="longitude"
-                                        value="{{ $tourguide->longitude }}">
+                                        value="{{ $longitude }}">
                                 </div>
 
 
                                 <div class="form-group col-md-6">
                                     <label>Jam Buka</label>
                                     <div class="input-group clockpicker">
-                                        <input required type="text" class="form-control" value="{{ $tourguide->jam_buka }}" name="jam_buka">
+                                        <input required type="text" class="form-control" value="{{ $jam_buka }}" name="jam_buka">
                                         <span class="input-group-append"> <span class="input-group-text">
                                                 <i class="fa fa-clock-o"></i></span></span>
                                     </div>
@@ -100,7 +108,7 @@
                                 <div class="form-group col-md-6">
                                     <label>Jam Tutup</label>
                                     <div class="input-group clockpicker">
-                                        <input required type="text" class="form-control" value="{{ $tourguide->jam_tutup }}" name="jam_tutup">
+                                        <input required type="text" class="form-control" value="{{ $jam_tutup }}" name="jam_tutup">
                                         <span class="input-group-append"> <span class="input-group-text">
                                                 <i class="fa fa-clock-o"></i></span></span>
                                     </div>
@@ -108,7 +116,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label>Deskripsi</label>
-                                    <textarea required class="form-control" rows="4" name="deskripsi" >{{ $tourguide->deskripsi }}</textarea>
+                                    <textarea required class="form-control" rows="4" name="deskripsi" >{{ $deskripsi }}</textarea>
                                 </div>
 
                                 <div class="col-md-6 d-flex flex-column  justify-content-center align-items-center">
@@ -164,41 +172,41 @@
 
 
             // submit form
-            $('form').submit(function(e) {
-                e.preventDefault();
-                var data = $(this).serialize();
+            // $('form').submit(function(e) {
+            //     e.preventDefault();
+            //     var data = $(this).serialize();
 
 
-                $.ajax({
-                    url: "{{ route('postProfil') }}",
-                    type: "POST",
-                    data: data,
-                    dataType: "JSON",
-                    success: function(data) {
-                        console.log(data);
-                        if (data.status == 'success') {
-                            Swal.fire({
-                                title: "Berhasil",
-                                text: "Data berhasil diubah",
-                                icon: "success",
-                                button: "OK",
-                            }).then(function() {
-                                location.reload();
-                            });
-                        } else {
-                            Swal.fire({
-                                title: "Gagal",
-                                text: "Data gagal diubah",
-                                icon: "error",
-                                button: "OK",
-                            }).then(function() {
-                                location.reload();
-                            });
-                        }
-                    }
+            //     $.ajax({
+            //         url: "{{ route('postProfil') }}",
+            //         type: "POST",
+            //         data: data,
+            //         dataType: "JSON",
+            //         success: function(data) {
+            //             console.log(data);
+            //             if (data.status == 'success') {
+            //                 Swal.fire({
+            //                     title: "Berhasil",
+            //                     text: "Data berhasil diubah",
+            //                     icon: "success",
+            //                     button: "OK",
+            //                 }).then(function() {
+            //                     location.reload();
+            //                 });
+            //             } else {
+            //                 Swal.fire({
+            //                     title: "Gagal",
+            //                     text: "Data gagal diubah",
+            //                     icon: "error",
+            //                     button: "OK",
+            //                 }).then(function() {
+            //                     location.reload();
+            //                 });
+            //             }
+            //         }
 
-                });
-            });
+            //     });
+            // });
 
         });
     </script>

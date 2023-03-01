@@ -57,8 +57,7 @@ class tgWisataController extends Controller
         if (  $request->file('foto')) {
             $file =  $request->file('foto');
             $name = $file->getClientOriginalName();
-            // $name = time().$file->getClientOriginalName();
-            $file->move(public_path().'/images/', $name);
+            $file->move(public_path().'/img/wisata/', $name);
         }else{
             return response()->json(['status' => 'error', 'message' => 'File not found.']);
         }
