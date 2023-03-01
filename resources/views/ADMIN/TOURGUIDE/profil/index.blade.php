@@ -19,39 +19,34 @@
                 <br><br>
                 <div class="row justify-content-center">
                     <div class="card " style="width: 18rem;">
-                        <img class="card-img-top" src="{{ asset('theme/img/f-foto.jpeg') }}" alt="Card image cap">
+                        <img src="{{ asset('img/tourguide/'.$tourguide->fp_wisata) }}" class="card-img-top" alt="...">
                     </div>
                 </div>
 
-
                 <div class="card-body">
                     <div class="basic-form">
-                        <form method="POST" action="{{ route('postProfil') }}">
+                        <form method="POST"  enctype="multipart/form-data">
                             @csrf
                             <div class="form-row">
 
                                 <div class="form-group col-md-6">
                                     <label for="username">Username</label>
                                     <input type="text" class="form-control" disabled name="username"
-                                        value="{{ $tourguide->username }}">
+                                        value="{{ $tourguide->user->username }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Password</label>
                                     <div class="input-group">
                                         <input type="password" class="form-control" name="password"
-                                            value="{{ $tourguide->password }}" />
-                                        <div class="input-group-append">
-                                            <span class="input-group-text" id="basic-addon2"><i class="fa fa-eye-slash"
-                                                    aria-hidden="true"></i></span>
-                                        </div>
+                                            value="">
                                     </div>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Nama Wisata</label>
-                                    <input type="text" class="form-control" name="nama_wisata"
-                                        value="{{ $tourguide->nama_wisata }} ">
+                                    <input required type="text" class="form-control" name="nama_wisata"
+                                        value="{{ $tourguide->nama_wisata }}" >
                                 </div>
 
                                 <div class="form-group col-md-6">
@@ -61,61 +56,63 @@
                                         <label class="custom-file-label">Choose file</label>
                                     </div>
                                 </div>
-                                
-
 
                                 <div class="form-group col-md-6">
                                     <label>No. Telpon/WhatsApp</label>
-                                    <input type="number" class="form-control" name="no_telp"
+                                    <input required type="number" class="form-control" name="no_telp"
                                         value="{{ $tourguide->no_telp }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" name="email"
+                                    <input required type="email" class="form-control" name="email"
                                         value="{{ $tourguide->email }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Alamat</label>
-                                    <input type="tetx" class="form-control" name="alamat"
+                                    <input required type="tetx" class="form-control" name="alamat"
                                         value="{{ $tourguide->alamat }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Latitude</label>
-                                    <input type="text" class="form-control" name="latitude"
+                                    <input required type="text" class="form-control" name="latitude"
                                         value="{{ $tourguide->latitude }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Longitude</label>
-                                    <input type="text" class="form-control" name="longitude"
+                                    <input required type="text" class="form-control" name="longitude"
                                         value="{{ $tourguide->longitude }}">
                                 </div>
 
+
                                 <div class="form-group col-md-6">
                                     <label>Jam Buka</label>
-                                    <input type="time" class="form-control" name="jam_buka"
-                                        value="{{ $tourguide->jam_buka }}">
+                                    <div class="input-group clockpicker">
+                                        <input required type="text" class="form-control" value="{{ $tourguide->jam_buka }}" name="jam_buka">
+                                        <span class="input-group-append"> <span class="input-group-text">
+                                                <i class="fa fa-clock-o"></i></span></span>
+                                    </div>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Jam Tutup</label>
-                                    <input type="time" class="form-control" name="jam_tutup"
-                                        value="{{ $tourguide->jam_tutup }}">
+                                    <div class="input-group clockpicker">
+                                        <input required type="text" class="form-control" value="{{ $tourguide->jam_tutup }}" name="jam_tutup">
+                                        <span class="input-group-append"> <span class="input-group-text">
+                                                <i class="fa fa-clock-o"></i></span></span>
+                                    </div>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Deskripsi</label>
-                                    <textarea class="form-control" rows="4" name="deskripsi" value=" {{ $tourguide->deskripsi }} "></textarea>
+                                    <textarea required class="form-control" rows="4" name="deskripsi" >{{ $tourguide->deskripsi }}</textarea>
                                 </div>
 
                                 <div class="col-md-6 d-flex flex-column  justify-content-center align-items-center">
-                                    {{-- button edit  --}}
                                     <button type="button" class="btn btn-warning" id="btnEdit">Edit</button>
-                                    {{-- button hapus --}}
-                                    {{-- button simpan --}}
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
 
@@ -133,38 +130,15 @@
     <script>
         $(document).ready(function() {
             //show modal disable false to custom im=nput file
-
+            console.log('ready');
             //undisebel input custom file
             $('.custom-file-input').on('change', function() {
                 let fileName = $(this).val().split('\\').pop();
                 $(this).next('.custom-file-label').addClass("selected").html(fileName);
             });
             //set format input time
-            $('input[type="time"]').attr('type', 'text');
-            $('input[type="time"]').timepicker({
-                timeFormat: 'HH:mm',
-                interval: 30,
-                minTime: '00',
-                maxTime: '23:30',
-                defaultTime: '00',
-                startTime: '00:00',
-                dynamic: false,
-                dropdown: true,
-                scrollbar: true
-            });
 
-            //show hidden passsword
-            $('.input-group-append').click(function() {
-                if ($(this).find('i').hasClass('fa-eye-slash')) {
-                    $(this).find('i').removeClass('fa-eye-slash');
-                    $(this).find('i').addClass('fa-eye');
-                    $(this).parent().find('input').attr('type', 'text');
-                } else {
-                    $(this).find('i').removeClass('fa-eye');
-                    $(this).find('i').addClass('fa-eye-slash');
-                    $(this).parent().find('input').attr('type', 'password');
-                }
-            });
+
 
             //disable input selain file
             // $('input[type="text"]').attr('disabled', true);
@@ -182,47 +156,49 @@
                 $('input').attr('disabled', false);
                 $('textarea').attr('disabled', false);
 
+
                 $('button[type="submit"]').show();
                 $(this).hide();
 
             });
 
 
-            //submit form
-            // $('form').submit(function(e){
-            //     e.preventDefault();
-            //     var data = $(this).serialize();
+            // submit form
+            $('form').submit(function(e) {
+                e.preventDefault();
+                var data = $(this).serialize();
 
-            //     $.ajax({
-            //         url: "{{ url('/update-profil') }}",
-            //         type: "POST",
-            //         data: data,
-            //         dataType: "JSON",
-            //         success: function(data){
-            //             console.log(data);
-            //             // if(data == 'success'){
-            //             //     swal({
-            //             //         title: "Berhasil",
-            //             //         text: "Data berhasil diubah",
-            //             //         icon: "success",
-            //             //         button: "OK",
-            //             //     }).then(function(){
-            //             //         location.reload();
-            //             //     });
-            //             // }else{
-            //             //     swal({
-            //             //         title: "Gagal",
-            //             //         text: "Data gagal diubah",
-            //             //         icon: "error",
-            //             //         button: "OK",
-            //             //     }).then(function(){
-            //             //         location.reload();
-            //             //     });
-            //             // }
-            //         }
 
-            //     });
-            // });
+                $.ajax({
+                    url: "{{ route('postProfil') }}",
+                    type: "POST",
+                    data: data,
+                    dataType: "JSON",
+                    success: function(data) {
+                        console.log(data);
+                        if (data.status == 'success') {
+                            Swal.fire({
+                                title: "Berhasil",
+                                text: "Data berhasil diubah",
+                                icon: "success",
+                                button: "OK",
+                            }).then(function() {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Gagal",
+                                text: "Data gagal diubah",
+                                icon: "error",
+                                button: "OK",
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }
+                    }
+
+                });
+            });
 
         });
     </script>

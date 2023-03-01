@@ -75,7 +75,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/dashboardtg', [tgDashboardController::class, 'index'])->name('tgDashboard');
         Route::get('/tg-profil', [tgProfilController::class, 'index'])->name('tgProfil');
         // Route::post('/update-foto-profil', [tgProfilController::class, 'updateFoto'])->name('updateFP');
-        Route::post('/update-profil', [tgProfilController::class, 'update'])->name('postProfil');
+        Route::post('/tg-profil/update-profil', [tgProfilController::class, 'update'])->name('postProfil');
         Route::resource('tg-wisata', tgWisataController::class);
 
         // Route::get('/user', [UserController::class, 'index'])->name('indexUser');

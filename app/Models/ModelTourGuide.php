@@ -32,6 +32,6 @@ class ModelTourguide extends Model
     //ambil data user
     public function user()
     {
-        return $this->belongsTo(ModelUser::class, 'users_id', 'id');
+        return $this->belongsTo('App\Models\ModelUser', 'users_id', 'id');
     }
 }

@@ -72,6 +72,35 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+     <!-- momment js is must -->
+    <script src="{{ asset('templates/vendor/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('templates/vendor/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <!-- clockpicker -->
+    <script src="{{ asset('templates/vendor/clockpicker/js/bootstrap-clockpicker.min.js') }}"></script>
+    <!-- asColorPicker -->
+    <script src="{{ asset('templates/vendor/jquery-asColor/jquery-asColor.min.js') }}"></script>
+    <script src="{{ asset('templates/vendor/jquery-asGradient/jquery-asGradient.min.js') }}"></script>
+    <script src="{{ asset('templates/vendor/jquery-asColorPicker/js/jquery-asColorPicker.min.js') }}"></script>
+    <!-- Material color picker -->
+    <script src="{{ asset('templates/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
+    <!-- pickdate -->
+    <script src="{{ asset('templates/vendor/pickadate/picker.js') }}"></script>
+    <script src="{{ asset('templates/vendor/pickadate/picker.time.js') }}"></script>
+    <script src="{{ asset('templates/vendor/pickadate/picker.date.js') }}"></script>
+
+
+
+    <!-- Daterangepicker -->
+    <script src="{{ asset('templates/js/plugins-init/bs-daterange-picker-init.js') }}"></script>
+    <!-- Clockpicker init -->
+    <script src="{{ asset('templates/js/plugins-init/clock-picker-init.js') }}"></script>
+    <!-- asColorPicker init -->
+    <script src="{{ asset('templates/js/plugins-init/jquery-asColorPicker.init.js') }}"></script>
+    <!-- Material color picker init -->
+    <script src="{{ asset('templates/js/plugins-init/material-date-picker-init.js') }}"></script>
+    <!-- Pickdate -->
+    <script src="{{ asset('templates/js/plugins-init/pickadate-init.js') }}"></script>
+
 
 
     @yield('script')
