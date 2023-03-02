@@ -13,7 +13,7 @@
         @yield('content')
     </div>
 
-
+    @yield('script')
 </body>
 
 </html>

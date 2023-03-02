@@ -28,7 +28,6 @@
     <script src="{{ asset('templates/js/quixnav-init.js') }}"></script>
     <script src="{{ asset('templates/js/custom.min.js') }}"></script>
 
-
     <!-- Vectormap -->
     <script src="{{ asset('templates/vendor/raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('templates/vendor/morris/morris.min.js') }}"></script>
@@ -97,6 +96,8 @@
     <script src="{{ asset('templates/js/plugins-init/material-date-picker-init.js') }}"></script>
     <!-- Pickdate -->
     <script src="{{ asset('templates/js/plugins-init/pickadate-init.js') }}"></script>
+    {{-- metis menu  --}}
+    <script src="{{ asset('templates/vendor/metismenu/js/metisMenu.min.js') }}"></script>
 
 
 </body>

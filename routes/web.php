@@ -12,13 +12,8 @@ use App\Http\Controllers\WisataController;
 use App\Http\Controllers\Tourguide\tgDashboardController;
 use App\Http\Controllers\Tourguide\tgProfilController;
 use App\Http\Controllers\Tourguide\tgWisataController;
-use Illuminate\Contracts\Session\Session;
-use Illuminate\Support\Facades\Auth;
-use Stevebauman\Location\Facades\Location;
 
 
-use Illuminate\Http\Request;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +33,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/wisata-foto', [FotoController::class, 'index'])->name('fotoWisata');
 Route::get('/wisata-kuliner', [KulinerController::class, 'index'])->name('kulinerWisata');
+Route::get('/wisata-all/{id}', [IndexController::class, 'detail'])->name('wisataAll');
+
 // Route::get('/', function () {
 //     dd(Location::get(request()->ip()));
 // });
@@ -55,18 +52,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['cekRole:1']], function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-        //WISATA
-        Route::group(['prefix' => '/wisata'], function () {
-            Route::get('/', [WisataController::class, 'index'])->name('indexWisata');
-        });
-
         //USER
         Route::resource('user', UserController::class);
-        // Route::group(['prefix' => '/user'], function () {
-        //     Route::get('/', [UserController::class, 'index'])->name('indexUser');
-        //     // Route::get('/users', [UserController::class, 'getDataUser'])->name('getDataUser');
-        // });
+        //WISATA
+        Route::resource('wisata', WisataController::class);
+        
     });
 
 
@@ -78,15 +68,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/tg-profil/update-profil', [tgProfilController::class, 'update'])->name('postProfil');
         Route::resource('tg-wisata', tgWisataController::class);
 
-        // Route::get('/user', [UserController::class, 'index'])->name('indexUser');
-        // Route::group(['prefix' => '/wisata'], function () {
-        //     Route::get('/', [WisataController::class, 'index'])->name('indexWisata');
-        // });
+        
     });
 
 
 
-    // Route::get('/user', [UserController::class, 'index'])->name('indexUser');
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

@@ -25,4 +25,6 @@
     <!-- Pick date -->
     <link rel="stylesheet" href="{{ asset('templates/vendor/pickadate/themes/default.css') }}">
     <link rel="stylesheet" href="{{ asset('templates/vendor/pickadate/themes/default.date.css') }}">
+
+    {{-- <link rel="stylesheet" href="{{ asset('templates/vendor/metismenu/css/metisMenu.min.css') }}" rel="stylesheet"> --}}
 </head>

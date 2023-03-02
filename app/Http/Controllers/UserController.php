@@ -40,15 +40,12 @@ class UserController extends Controller
     {
        try{
             
-
             $user = User::find($request->data_id);
 
             if ($request->password == null || Hash::check($request->password, $user->password))
                 $password = $user->password;
             else
                 $password = bcrypt($request->password);
-
-            
 
             User::updateOrCreate(
                 ['id' => $request->data_id],

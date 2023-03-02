@@ -25,8 +25,8 @@
 
                 <div class="card-body">
                     <div class="basic-form">
-                        {{-- <form method="POST"  enctype="multipart/form-data"> --}}
-                        <form method="POST"  enctype="multipart/form-data" action="{{ route('postProfil') }}">
+                        <form method="POST"  enctype="multipart/form-data">
+                        {{-- <form method="POST"  enctype="multipart/form-data" action="{{ route('postProfil') }}"> --}}
 
                             @csrf
                             <div class="form-row">
@@ -172,41 +172,43 @@
 
 
             // submit form
-            // $('form').submit(function(e) {
-            //     e.preventDefault();
-            //     var data = $(this).serialize();
+            $('form').submit(function(e) {
+                e.preventDefault();
+                var data = $(this).serialize();
 
 
-            //     $.ajax({
-            //         url: "{{ route('postProfil') }}",
-            //         type: "POST",
-            //         data: data,
-            //         dataType: "JSON",
-            //         success: function(data) {
-            //             console.log(data);
-            //             if (data.status == 'success') {
-            //                 Swal.fire({
-            //                     title: "Berhasil",
-            //                     text: "Data berhasil diubah",
-            //                     icon: "success",
-            //                     button: "OK",
-            //                 }).then(function() {
-            //                     location.reload();
-            //                 });
-            //             } else {
-            //                 Swal.fire({
-            //                     title: "Gagal",
-            //                     text: "Data gagal diubah",
-            //                     icon: "error",
-            //                     button: "OK",
-            //                 }).then(function() {
-            //                     location.reload();
-            //                 });
-            //             }
-            //         }
+                $.ajax({
+                    url: "{{ route('postProfil') }}",
+                    type: "POST",
+                    data: data,
+                    dataType: "JSON",
+                    success: function(data) {
+                        console.log(data);
+                        if (data.status == 'success') {
+                            Swal.fire({
+                                title: "Berhasil",
+                                text: "Data berhasil diubah",
+                                icon: "success",
+                                button: "OK",
+                            }).then(function() {
+                                // arahkan ke halaman lain
+                                location.reload();
+                                
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Gagal",
+                                text: "Data gagal diubah",
+                                icon: "error",
+                                button: "OK",
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }
+                    }
 
-            //     });
-            // });
+                });
+            });
 
         });
     </script>

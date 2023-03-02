@@ -1,24 +1,24 @@
 @extends('APPS._layouts.index')
 @section('content')
-        <section class="section-header">
-            <div class="section-header-image">
-                <img src="{{ asset('theme/img/xx1.png') }}" alt="Header">
-            </div>
-            <div class="container">
-                <div class="section-header-inner">
-                    <div class="section-header-title">
-                        <h3 class="title">GREAT <br> ART <br>OF <br>MAKASSAR</h3>
-                        <p>Telusuri Keindahan Makassar Yang <br> Belum Pernah Anda Temui Sebelumnya</p>
-                        {{-- <a href="" class="btn btn-round btn-orange">See Our Vacation</a> --}}
-                    </div>
-                    <div class="section-header-title-xs">
-                        <h3 class="title">GREAT <br> ART <br>OF <br>MAKASSAR</h3>
-                        <p>Telusuri Keindahan Makassar Yang <br> Belum Pernah Anda Temui Sebelumnya</p>
-                    </div>
-
+    <section class="section-header">
+        <div class="section-header-image">
+            <img src="{{ asset('theme/img/xx1.png') }}" alt="Header">
+        </div>
+        <div class="container">
+            <div class="section-header-inner">
+                <div class="section-header-title">
+                    <h3 class="title">GREAT <br> ART <br>OF <br>MAKASSAR</h3>
+                    <p>Telusuri Keindahan Makassar Yang <br> Belum Pernah Anda Temui Sebelumnya</p>
+                    {{-- <a href="" class="btn btn-round btn-orange">See Our Vacation</a> --}}
                 </div>
+                <div class="section-header-title-xs">
+                    <h3 class="title">GREAT <br> ART <br>OF <br>MAKASSAR</h3>
+                    <p>Telusuri Keindahan Makassar Yang <br> Belum Pernah Anda Temui Sebelumnya</p>
+                </div>
+
             </div>
-        </section>
+        </div>
+    </section>
 
     <section class="section section-about">
         <div class="about-head slides">
@@ -55,63 +55,30 @@
 
     <section class="section section-about">
         <div class="about-head slides">
-            <h3>Spot Foto</h3>
+            <h3>Tempat Wisata</h3>
         </div>
         <div class="about-body">
             <div class="section-discover-body slides">
-                <div class="col">
-                    <a href="destination.html">
-                        <img src="{{ asset('theme/img/f-foto.jpeg') }}" alt="Destination">
-                        <div class="caption">
-                            <p>Masjid Terapung</p>
-                            <div class="line"></div>
-
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="culture.html">
-                        <img src="{{ asset('theme/img/wis-2.jpg') }}">
-                        <div class="caption" alt="Culture">
-                            <p>Pantai Akkarena</p>
-                            <div class="line"></div>
-
-                        </div>
-                    </a>
-                </div>
+                @foreach ($data as $item)
+                    <div class="col">
+                        {{-- <a href="{{ route('detail', $item->id) }}"> --}}
+                        <a href="">
+                            <img src="{{ asset('img/foto_profil_wisata/' . $item->fp_wisata) }}" alt="Destination">
+                            <div class="caption">
+                                <p>{{ $item->nama }}</p>
+                                <div class="line"></div>
+                                <div class="caption-text">
+                                    <p>{{ $item->alamat }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <section class="section section-about">
-        <div class="about-head slides">
-            <h3>Kuliner</h3>
-        </div>
-        <div class="about-body">
-            <div class="section-discover-body slides">
-                <div class="col">
-                    <a href="destination.html">
-                        <img src="{{ asset('theme/img/mkn-2.jpg') }}" alt="Destination">
-                        <div class="caption">
-                            <p>Pallubasa</p>
-                            <div class="line"></div>
 
-                        </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a href="culture.html">
-                        <img src="{{ asset('theme/img/f-kuliner.jpg') }}">
-                        <div class="caption" alt="Culture">
-                            <p>Coto Makassar</p>
-                            <div class="line"></div>
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Section Explore -->
 
@@ -168,8 +135,9 @@
     @include('APPS._layouts.footer')
 
     @include('APPS._layouts.js')
+@endsection
 
-
+@section('script')
     <script>
         var markers = [];
         var contents = [];
@@ -258,7 +226,7 @@
 
                                 // var distance = distance / 1000;
                                 // var distance = distance.toFixed(2);
-                                
+
 
 
 

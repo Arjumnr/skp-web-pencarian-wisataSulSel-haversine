@@ -8,13 +8,13 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('/user') }}" aria-expanded="false">
+                <a href="{{ route('user.index') }}" aria-expanded="false">
                     <i class="icon icon-single-04"></i><span class="nav-text">Users</span>
                 </a>
             </li>
 
             <li>
-                <a href="{{ route('indexWisata') }}" aria-expanded="false">
+                <a href="{{ route('wisata.index') }}" aria-expanded="false">
                     <i class="icon icon-world-2"></i><span class="nav-text">Wisata</span>
                 </a>
             </li>
