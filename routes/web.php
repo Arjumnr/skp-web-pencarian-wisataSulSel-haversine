@@ -15,6 +15,7 @@ use App\Http\Controllers\Tourguide\tgWisataController;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +34,7 @@ use App\Http\Controllers\Tourguide\tgWisataController;
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/wisata-foto', [FotoController::class, 'index'])->name('fotoWisata');
 Route::get('/wisata-kuliner', [KulinerController::class, 'index'])->name('kulinerWisata');
-Route::get('/wisata-all/{id}', [IndexController::class, 'detail'])->name('wisataAll');
+Route::get('/wisata-all/{id}', [IndexController::class, 'detail'])->name('detail');
 
 // Route::get('/', function () {
 //     dd(Location::get(request()->ip()));
@@ -79,6 +80,30 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::get('/log', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+
+//Clear route cache:
+Route::get('/rc', function () {
+    $exitCode = Artisan::call('route:cache');
+    return 'Routes cache cleared';
+});
+
+//Clear config cache:
+Route::get('/clear-cache', function () {
+    $exitCode = Artisan::call('config:cache');
+    return 'Config cache cleared';
+});
+
+// Clear application cache:
+Route::get('/clear-cache', function () {
+    $exitCode = Artisan::call('cache:clear');
+    return 'Application cache cleared';
+});
+
+// Clear view cache:
+Route::get('/view-clear', function () {
+    $exitCode = Artisan::call('view:clear');
+    return 'View cache cleared';
+});
 
 
 

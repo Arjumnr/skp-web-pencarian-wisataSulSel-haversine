@@ -1,5 +1,6 @@
 @extends('ADMIN.TOURGUIDE._layouts.index')
 @section('content')
+    <?php $fp_wisata; ?>
     <div class="container-fluid">
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
@@ -25,10 +26,10 @@
 
                 <div class="card-body">
                     <div class="basic-form">
-                        <form method="POST"  enctype="multipart/form-data">
-                        {{-- <form method="POST"  enctype="multipart/form-data" action="{{ route('postProfil') }}"> --}}
+                        <form id="formProfil" name="formProfil" enctype="multipart/form-data" method="POST">
+                            {{-- <form method="POST"  enctype="multipart/form-data" action="{{ route('postProfil') }}"> --}}
 
-                            @csrf
+                            {{ csrf_field() }}
                             <div class="form-row">
 
                                 <div class="form-group col-md-6">
@@ -40,21 +41,20 @@
                                 <div class="form-group col-md-6">
                                     <label>Password</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" name="password"
-                                            value="">
+                                        <input type="password" class="form-control" name="password" value="">
                                     </div>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Nama Tourguide</label>
                                     <input required type="text" class="form-control" name="name"
-                                        value="{{ $name }}" >
+                                        value="{{ $name }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Nama Wisata</label>
                                     <input required type="text" class="form-control" name="nama_wisata"
-                                        value="{{ $nama_wisata }}" >
+                                        value="{{ $nama_wisata }}">
                                 </div>
 
                                 <div class="form-group col-md-6">
@@ -99,7 +99,8 @@
                                 <div class="form-group col-md-6">
                                     <label>Jam Buka</label>
                                     <div class="input-group clockpicker">
-                                        <input required type="text" class="form-control" value="{{ $jam_buka }}" name="jam_buka">
+                                        <input required type="text" class="form-control" value="{{ $jam_buka }}"
+                                            name="jam_buka">
                                         <span class="input-group-append"> <span class="input-group-text">
                                                 <i class="fa fa-clock-o"></i></span></span>
                                     </div>
@@ -108,7 +109,8 @@
                                 <div class="form-group col-md-6">
                                     <label>Jam Tutup</label>
                                     <div class="input-group clockpicker">
-                                        <input required type="text" class="form-control" value="{{ $jam_tutup }}" name="jam_tutup">
+                                        <input required type="text" class="form-control" value="{{ $jam_tutup }}"
+                                            name="jam_tutup">
                                         <span class="input-group-append"> <span class="input-group-text">
                                                 <i class="fa fa-clock-o"></i></span></span>
                                     </div>
@@ -116,7 +118,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label>Deskripsi</label>
-                                    <textarea required class="form-control" rows="4" name="deskripsi" >{{ $deskripsi }}</textarea>
+                                    <textarea required class="form-control" rows="4" name="deskripsi">{{ $deskripsi }}</textarea>
                                 </div>
 
                                 <div class="col-md-6 d-flex flex-column  justify-content-center align-items-center">
@@ -171,45 +173,50 @@
             });
 
 
-            // submit form
-            $('form').submit(function(e) {
-                e.preventDefault();
-                var data = $(this).serialize();
+        });
 
+        $('#formProfil').on('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            var id = $('#data_id').val();
+            var url = "{{ route('postProfil') }}";
+            $.ajax({
+                url: url,
+                method: "POST",
+                data: formData,
+                dataType: "JSON",
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    console.log(data);
+                    if (data.status == 'success') {
+                        Swal.fire({
+                            title: "Berhasil",
+                            text: "Data berhasil diubah",
+                            icon: "success",
+                            button: "OK",
+                        }).then(function() {
+                            // arahkan ke halaman lain
+                            location.reload();
 
-                $.ajax({
-                    url: "{{ route('postProfil') }}",
-                    type: "POST",
-                    data: data,
-                    dataType: "JSON",
-                    success: function(data) {
-                        console.log(data);
-                        if (data.status == 'success') {
-                            Swal.fire({
-                                title: "Berhasil",
-                                text: "Data berhasil diubah",
-                                icon: "success",
-                                button: "OK",
-                            }).then(function() {
-                                // arahkan ke halaman lain
-                                location.reload();
-                                
-                            });
-                        } else {
-                            Swal.fire({
-                                title: "Gagal",
-                                text: "Data gagal diubah",
-                                icon: "error",
-                                button: "OK",
-                            }).then(function() {
-                                location.reload();
-                            });
-                        }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Gagal",
+                            text: "Data gagal diubah",
+                            icon: "error",
+                            button: "OK",
+                        }).then(function() {
+                            // arahkan ke halaman lain
+                            location.reload();
+
+                        });
                     }
+                },
 
-                });
+
             });
-
         });
     </script>
 @endsection

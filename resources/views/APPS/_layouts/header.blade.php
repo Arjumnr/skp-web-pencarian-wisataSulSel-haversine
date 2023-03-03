@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bavel - Bali Travel Time</title>
+    <title>MAKASSAR-Travel</title>
     <link rel="icon" type="image/png" href="{{ asset('theme/img/icon/bavel.png') }}">
 
     <!-- Meta Description -->

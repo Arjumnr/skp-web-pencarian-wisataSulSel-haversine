@@ -62,10 +62,10 @@
                 @foreach ($data as $item)
                     <div class="col">
                         {{-- <a href="{{ route('detail', $item->id) }}"> --}}
-                        <a href="">
+                        <a href="{{ url('wisata-all/' . $item->users_id) }}">
                             <img src="{{ asset('img/foto_profil_wisata/' . $item->fp_wisata) }}" alt="Destination">
                             <div class="caption">
-                                <p>{{ $item->nama }}</p>
+                                <p>{{ $item->nama_wisata }}</p>
                                 <div class="line"></div>
                                 <div class="caption-text">
                                     <p>{{ $item->alamat }}</p>
@@ -105,7 +105,7 @@
         </div>
         <div class="section-discover-body slides">
             <div class="col">
-                <a href="destination.html">
+                <a href="{{ route('fotoWisata') }}">
                     <img src="{{ asset('theme/img/f-foto.jpeg') }}" alt="Destination">
                     <div class="caption">
                         <p>WISATA SPOT FOTO</p>
@@ -117,7 +117,7 @@
                 </a>
             </div>
             <div class="col">
-                <a href="culture.html">
+                <a href="{{ route('kulinerWisata') }}">
                     <img src="{{ asset('theme/img/f-kuliner.jpg') }}">
                     <div class="caption" alt="Culture">
                         <p>WISATA KULINER</p>
@@ -170,6 +170,7 @@
                 var long = parseFloat(dataToMake[i].lng);
                 var icon = dataToMake[i].icon;
                 var title = dataToMake[i].title;
+                console.log(lat);
 
                 var marker = new google.maps.Marker({
                     position: {
@@ -179,12 +180,12 @@
                     map: map,
                     icon: icon,
                     title: title,
-
                 });
 
                 markers.push(marker);
 
             }
+
 
             infoWindow = new google.maps.InfoWindow();
 
@@ -212,7 +213,7 @@
                             );
                             infoWindow.open(map);
                             map.setCenter(pos);
-                            directionsRenderer.setMap(map);
+                            // directionsRenderer.setMap(map);
 
                             //tampilkan list jarak dari yang terdekat ke jauh di tag list 
 

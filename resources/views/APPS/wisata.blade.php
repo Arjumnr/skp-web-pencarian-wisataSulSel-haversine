@@ -1,6 +1,7 @@
 @extends('APPS._layouts.index')
 @section('content')
-    <section class="section-header">
+<?php $dataSpotFoto ?>
+<section class="section-header">
         <div class="section-header-image">
             <img src="{{ asset('theme/img/xx1.png') }}" alt="Header">
         </div>
@@ -16,6 +17,31 @@
                     <p>Telusuri Keindahan Makassar Yang <br> Belum Pernah Anda Temui Sebelumnya</p>
                 </div>
 
+            </div>
+        </div>
+    </section>
+    <section class="section section-about">
+        <div class="about-head slides slideanim">
+            <h3>{{ $tourguide->nama_wisata }}</h3>
+            <p>{{ $tourguide->deskripsi }}</p>
+        </div>
+        <div class="about-body">
+            <div class="row slides slideanim">
+                <div class="col">
+                    <img src="{{ asset('theme/img/About/035-trekking.png') }}">
+                    <h2>WAKTU</h2>
+                    <p>BUKA <b>{{ $tourguide->jam_buka }}</b> - TUTUP <b>{{ $tourguide->jam_tutup }}</b></p>
+                </div>
+                <div class="col">
+                    <img src="{{ asset('theme/img/About/028-book.png') }}">
+                    <h2>GUIDE</h2>
+                    <p>Kami memberikan info - info seputar destinasi terbaik</p>
+                </div>
+                <div class="col">
+                    <img src="{{ asset('theme/img/About/024-tent.png') }}">
+                    <h2>Alamat</h2>
+                    <p>{{ $tourguide->alamat }}</p>
+                </div>
             </div>
         </div>
     </section>

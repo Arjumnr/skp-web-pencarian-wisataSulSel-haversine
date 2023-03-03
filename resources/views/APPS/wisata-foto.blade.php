@@ -26,22 +26,21 @@
         <div class="about-body">
             <div class="section-discover-body slides">
                 @foreach ($dataSpotFoto as $item)
-                    
                     <div class="col">
                         <a href="">
                             <img src="{{ asset('img/wisata/' . $item->foto) }}" alt="Destination">
                             <div class="caption">
                                 <p>{{ $item->nama }}</p>
                                 <div class="line"></div>
-                                    <div class="caption-text">
-                                        <p>{{ $item->deskripsi }}</p>
-                                    </div>
+                                <div class="caption-text">
+                                    <p>{{ $item->deskripsi }}</p>
+                                </div>
                             </div>
-                        </a>
                     </div>
-                    
-                @endforeach
-                {{-- <div class="col">
+                    </a>
+            </div>
+            @endforeach
+            {{-- <div class="col">
                     <a href="destination.html">
                         <img src="{{ asset('theme/img/f-foto.jpeg') }}" alt="Destination">
                         <div class="caption">
@@ -61,7 +60,7 @@
                         </div>
                     </a>
                 </div> --}}
-            </div>
+        </div>
         </div>
     </section>
     @include('APPS._layouts.footer')
